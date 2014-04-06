@@ -57,7 +57,7 @@
   (pushnew dir asdf:*central-registry*)
   (asdf:load-system name))
 
-(defcommand "ASDF Add Dir And Load" (p)
+(defcommand "ASDF Add Load" (p)
      "Add directory in asdf:*central-registry* and load ASDF system \(and compiles it if necessary)."
      "Add ASDF directory and load system."
   (declare (ignore p))
