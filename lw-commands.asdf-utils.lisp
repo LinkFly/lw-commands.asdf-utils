@@ -23,12 +23,28 @@
   (declare (ignore parse-inf))
   (editor::complete-string string (systems-in-dir *cur-dir*)
                            :ignore-case t))
+
+(defun prompt-for-command (prompt &key verify-func complete-func (help "") (must-exist t) help (default "") (default-string "") (type :string))
+  "Prompts for LW commands execute."
+  (editor::parse-for-something
+   :prompt prompt
+   :must-exist must-exist
+   :help help
+   :default default
+   :default-string ""
+   :verify-func (lambda (string parse-inf)
+                  (declare (ignore parse-inf))
+                  string)
+   :type :string
+   :default-in-prompt nil
+   :complete-func 'complete-system-in-dir)
+
 (defun prompt-for-asdf-name ()
   "Prompts for an ASDF system name with STRING being the default."
   (editor::parse-for-something
    :prompt (format nil "Select ASDF system: ")
    :must-exist t
-   :help "Type a directory with ASDF system."
+   :help "Type ASDF-system name."
    :default ""
    :default-string ""
    :verify-func (lambda (string parse-inf)
